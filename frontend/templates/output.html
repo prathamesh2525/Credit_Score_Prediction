@@ -1,0 +1,121 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Credit Score Prediction Result</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f2f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: 600px;
+            margin: 20px;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 24px;
+            color: #333;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th,
+        td {
+            padding: 10px;
+            border: 1px solid #ccc;
+            text-align: center;
+        }
+
+        th {
+            background-color: #007bff;
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Credit Score Prediction Result</h1>
+        <p>Your predicted credit score is: <strong>{{ score }}</strong></p>
+        <table>
+            <thead>
+                <tr>
+                    <th>Credit Score Range</th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>750 - 850</td>
+                    <td>Good</td>
+                </tr>
+                <tr>
+                    <td>650 - 749</td>
+                    <td>Standard</td>
+                </tr>
+                <tr>
+                    <td>300 - 649</td>
+                    <td>Poor</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Credit Score Prediction</title>
+    <script>
+        // JavaScript to map score to category and display it
+        function displayCategory(score) {
+            const categories = {
+                0: "Poor",
+                1: "Standard",
+                2: "Good",
+            };
+
+            // Get the category from the score
+            const category = categories[score] || "Unknown";
+
+            // Update the category display
+            document.getElementById("category").textContent = category;
+        }
+    </script>
+</head>
+<body>
+    <h1>Credit Score Prediction</h1>
+    <p>Your predicted credit score is: <strong id="score">{{ score }}</strong></p>
+    <p>Category: <strong id="category"></strong></p>
+
+    <!-- Call the JavaScript function after the page loads -->
+    <script>
+        // Pass the score from the server to the JavaScript function
+        const score = parseInt(document.getElementById("score").textContent);
+        displayCategory(score);
+    </script>
+</body>
+</html>

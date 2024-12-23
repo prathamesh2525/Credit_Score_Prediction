@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Credit Score Prediction</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            /* background-color: #65c388; */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-image: url('https://images.pexels.com/photos/259249/pexels-photo-259249.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1');
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+        .container {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: 600px;
+            margin: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 24px;
+            color: #333;
+        }
+
+        .form-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .form-row>div {
+            flex: 1;
+            min-width: 45%;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #555;
+        }
+
+        input,
+        select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        input[type="submit"] {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+
+        .radio-group {
+            display: flex;
+            gap: 10px;
+        }
+
+        .radio-group label {
+            font-weight: normal;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Credit Score Prediction</h1>
+        <form action="/predict" method="post">
+            <div class="form-row">
+                <div>
+                    <label for="age">Age:</label>
+                    <input type="number" id="age" name="age" required>
+                </div>
+                <div>
+                    <label for="annualIncome">Annual Income:</label>
+                    <input type="number" id="annualIncome" name="annualIncome" required>
+                </div>
+            </div>
+            <div class="form-row">
+                <div>
+                    <label for="delayFromDueDate">Delay from Due Date:</label>
+                    <input type="number" id="delayFromDueDate" name="delayFromDueDate" required>
+                </div>
+                <div>
+                    <label for="numDelayedPayment">Number of Delayed Payments:</label>
+                    <input type="number" id="numDelayedPayment" name="numDelayedPayment" required>
+                </div>
+            </div>
+            <div class="form-row">
+                <div>
+                    <label for="numCreditInquiries">Number of Credit Inquiries:</label>
+                    <input type="number" id="numCreditInquiries" name="numCreditInquiries" required>
+                </div>
+                <div>
+                    <label for="creditMix">Credit Mix:</label>
+                    <select id="creditMix" name="creditMix" required>
+                        <option value="Good">Good</option>
+                        <option value="Standard">Standard</option>
+                        <option value="Poor">Poor</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-row">
+                <div>
+                    <label for="outstandingDebt">Outstanding Debt:</label>
+                    <input type="number" id="outstandingDebt" name="outstandingDebt" required>
+                </div>
+                <div>
+                    <label for="creditUtilizationRatio">Credit Utilization Ratio:</label>
+                    <input type="number" id="creditUtilizationRatio" name="creditUtilizationRatio" required>
+                </div>
+                <div>
+                    <label for="totalEMI">Total EMI per Month:</label>
+                    <input type="number" id="totalEMI" name="totalEMI" required>
+                </div>
+            </div>
+            <div class="form-row">
+                <div>
+                    <label for="creditAgeYears">Credit Age (Years):</label>
+                    <input type="number" id="creditAgeYears" name="creditAgeYears" required>
+                </div>
+            </div>
+            <div class="form-row">
+                <div>
+                    <label>Payment of Min Amount:</label>
+                    <div class="radio-group">
+                        <label for="paymentMinAmount_Yes">
+                            <input type="radio" id="paymentMinAmount_Yes" name="paymentMinAmount" value="yes" required>
+                            Yes
+                        </label>
+                        <label for="paymentMinAmount_No">
+                            <input type="radio" id="paymentMinAmount_No" name="paymentMinAmount" value="no" required> No
+                        </label>
+                        
+                        <label for="paymentMinAmount_NM">
+                            <input type="radio" id="paymentMinAmount_NM" name="paymentMinAmount" value="not_mention"
+                                required> Not Mention
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <input type="submit" value="Predict">
+        </form>
+    </div>
+</body>
+
+</html>
