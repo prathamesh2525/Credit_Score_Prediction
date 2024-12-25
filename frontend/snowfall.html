@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    
+  </head>
+  <body>
+    <div id="snowfall"></div>
+
+    <script>
+      const snowfall = document.getElementById("snowfall")
+      const numSnowflakes = 500
+      const snowflakes = []
+
+      for (let i = 0; i < numSnowflakes; i++) {
+        const snowflake = document.createElement("div")
+        snowflake.className = "snowflake"
+        snowflake.style.left = `${Math.random() * window.innerWidth}px`
+        snowflake.style.top = `${Math.random() * -window.innerHeight}px`
+        snowfall.appendChild(snowflake)
+        snowflakes.push(snowflake)
+      }
+
+      setInterval(() => {
+        snowflakes.forEach((snowflake, index) => {
+          const top = parseInt(snowflake.style.top)
+          snowflake.style.top = `${top + Math.random() * 2}px`
+          if (top > window.innerHeight) {
+            snowflake.style.top = `${Math.random() * -window.innerHeight}px`
+            snowflake.style.left = `${Math.random() * window.innerWidth}px`
+          }
+        })
+      }, 16)
+    </script>
+  </body>
+</html>

@@ -9,7 +9,7 @@ import os
 app = Flask(__name__)
 
 # Load the trained decision tree model
-model_path = os.path.join(os.path.dirname(__file__), "decision_tree_model.pkl")
+model_path = os.path.join(os.path.dirname(__file__), "../decision_tree_model.pkl")
 with open(model_path, "rb") as file:
     decision_tree_model = pickle.load(file)
 

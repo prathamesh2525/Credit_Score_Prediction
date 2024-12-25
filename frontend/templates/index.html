@@ -8,19 +8,18 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            /* background-color: #65c388; */
+            background-image: url('https://images.pexels.com/photos/259249/pexels-photo-259249.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1');
+            background-repeat: no-repeat;
+            background-size: cover;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
             margin: 0;
-            background-image: url('https://images.pexels.com/photos/259249/pexels-photo-259249.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1');
-            background-repeat: no-repeat;
-            background-size: cover;
         }
 
         .container {
-            background-color: #fff;
+            background-color: rgba(255, 255, 255, 0.9);
             padding: 30px;
             border-radius: 10px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
@@ -32,7 +31,7 @@
         h1 {
             text-align: center;
             margin-bottom: 20px;
-            font-size: 24px;
+            font-size: 28px;
             color: #333;
         }
 
@@ -70,6 +69,10 @@
             border: none;
             cursor: pointer;
             transition: background-color 0.3s;
+            padding: 12px;
+            border-radius: 5px;
+            font-size: 16px;
+            margin-top: 15px;
         }
 
         input[type="submit"]:hover {
@@ -83,6 +86,25 @@
 
         .radio-group label {
             font-weight: normal;
+        }
+
+        .credit-details {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        .credit-details p {
+            margin: 5px 0;
+            font-size: 14px;
+            color: #444;
+        }
+
+        .highlight {
+            font-weight: bold;
+            color: #007bff;
         }
     </style>
 </head>
@@ -154,18 +176,27 @@
                             Yes
                         </label>
                         <label for="paymentMinAmount_No">
-                            <input type="radio" id="paymentMinAmount_No" name="paymentMinAmount" value="no" required> No
+                            <input type="radio" id="paymentMinAmount_No" name="paymentMinAmount" value="no" required>
+                            No
                         </label>
-                        
+
                         <label for="paymentMinAmount_NM">
                             <input type="radio" id="paymentMinAmount_NM" name="paymentMinAmount" value="not_mention"
-                                required> Not Mention
+                                required>
+                            Not Mentioned
                         </label>
                     </div>
                 </div>
             </div>
             <input type="submit" value="Predict">
         </form>
+        <div class="credit-details">
+            <h3>Credit Details</h3>
+            <p><span class="highlight">Credit Mix:</span> Indicates the variety of credit accounts (e.g., credit cards, loans).</p>
+            <p><span class="highlight">Outstanding Debt:</span> Total unpaid loan or credit card balance.</p>
+            <p><span class="highlight">Credit Utilization Ratio:</span> Percentage of used credit compared to the total limit.</p>
+            <p><span class="highlight">Total EMI:</span> Monthly installment amount for existing loans.</p>
+        </div>
     </div>
 </body>
 
