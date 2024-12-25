@@ -1,189 +1,176 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Credit Score Prediction</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-image: linear-gradient(to bottom, #f5f7fa, #c3cfe2);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
+        /* Reset and base styles */
+        * {
             margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
 
-        .container {
-            background-color: white;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-            width: 100%;
-            max-width: 600px;
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #2c3e50, #34495e); /* Dark gradient */
+            color: #ecf0f1;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
             text-align: center;
         }
 
         h1 {
-            text-align: center;
+            font-size: 2.5rem;
+            color: #f39c12;
             margin-bottom: 20px;
-            font-size: 28px;
-            color: #333;
+            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
         }
 
         p {
-            font-size: 16px;
-            margin: 10px 0;
-            color: #444;
-        }
-
-        table {
-            margin: 20px auto;
-            border-collapse: collapse;
-            width: 100%;
-            max-width: 500px;
-        }
-
-        th, td {
-            padding: 10px;
-            text-align: center;
-            border: 1px solid #ddd;
-        }
-
-        th {
-            background-color: #f2f2f2;
-            font-weight: bold;
-        }
-
-        .rating-bar {
-            position: relative;
-            height: 10px;
-            background-color: #ddd;
-            border-radius: 5px;
-            margin: 20px 0;
-            width: 100%;
-        }
-
-        .indicator {
-            position: absolute;
-            top: -5px;
-            height: 20px;
-            width: 20px;
-            background-color: #007bff;
-            border-radius: 50%;
-            transition: left 2s ease; /* Smooth 2-second movement */
-        }
-
-        .labels {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 10px;
-            font-size: 14px;
+            font-size: 1.2rem;
+            color: #ecf0f1;
+            background: rgba(0, 0, 0, 0.6);
+            padding: 15px 25px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            margin-bottom: 15px;
         }
 
         #category {
-            font-size: 20px;
             font-weight: bold;
             padding: 10px;
-            border-radius: 8px;
-            display: inline-block;
-            margin-top: 20px;
+            border-radius: 5px;
         }
 
-        .score-poor {
-            background-color: #f8d7da;
-            color: #721c24;
+        .poor {
+            background-color: #e74c3c;
+            color: #fff;
         }
 
-        .score-standard {
-            background-color: #cce5ff;
-            color: #004085;
+        .standard {
+            background-color: #f39c12;
+            color: #fff;
         }
 
-        .score-good {
-            background-color: #d4edda;
-            color: #155724;
+        .good {
+            background-color: #2ecc71;
+            color: #fff;
         }
 
-        #sh {
+        table {
+            width: 90%;
+            max-width: 700px;
+            margin-top: 30px;
+            border-collapse: collapse;
+            border-radius: 10px;
+            background: rgba(44, 62, 80, 0.9);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+        }
+        #pp{
             display: none;
+        }
+        th, td {
+            padding: 15px;
+            text-align: center;
+            border-bottom: 1px solid #bdc3c7;
+        }
+
+        th {
+            background-color: #34495e;
+            color: #ecf0f1;
+        }
+
+        tr:hover {
+            background-color: #1abc9c;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            p {
+                font-size: 1rem;
+            }
+            table {
+                font-size: 0.9rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1.8rem;
+            }
+            p {
+                font-size: 0.9rem;
+            }
         }
     </style>
     <script>
-        function displayCategory(category) {
-            const categoryElement = document.getElementById("category");
-            const indicator = document.querySelector(".indicator");
-            let indicatorPosition = 0;
+        // JavaScript to map score to category and display it
+        function displayCategory(score) {
+        console.log(score);
+            const categories = {
+                0: "Poor",
+                1: "Standard",
+                2: "Good",
+            };
+            // Get the category from the score
+            const category = categories[score] || "Unknown";
+            // Update the category display
+            document.getElementById("category").textContent = category;
 
-            // Update category text and color
-            categoryElement.textContent = category;
-            categoryElement.className = ""; // Reset previous classes
-
-            if (category === "Poor") {
-                categoryElement.classList.add("score-poor");
-                indicatorPosition = 0; // Move indicator to "Poor"
-            } else if (category === "Standard") {
-                categoryElement.classList.add("score-standard");
-                indicatorPosition = 50; // Move indicator to "Standard"
-            } else if (category === "Good") {
-                categoryElement.classList.add("score-good");
-                indicatorPosition = 100; // Move indicator to "Good"
-            }
-
-            // Move the indicator to the correct position
-            indicator.style.left = `calc(${indicatorPosition}% - 10px)`;
+            // Show the relevant table rows based on category
+            const tableRows = document.querySelectorAll('.category-row');
+            tableRows.forEach(row => {
+                if (row.dataset.category === category) {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
+                }
+            });
         }
     </script>
 </head>
-
 <body>
-    <div class="container">
-        <h1>Credit Score Prediction</h1>
-        <!-- <p>Your predicted credit score is: <strong id="score">{{ score }}</strong></p> -->
-        <p id="sh">Your predicted category is: <strong id="category-value">Standard</strong></p>
-        <p>Category: <span id="category"></span></p>
+    <h1>Credit Score Prediction</h1>
+    <p id="pp">Your predicted credit score is: <strong id="score">{{score}}</strong></p>
+    <p>Category: <strong id="category"></strong></p>
+    
+    <table>
+        <thead>
+            <tr>
+                <th>Credit Score Range</th>
+                <th>Category</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="category-row" data-category="Poor">
+                <td>350 - 500</td>
+                <td>Poor</td>
+            </tr>
+            <tr class="category-row" data-category="Standard">
+                <td>501 - 700</td>
+                <td>Standard</td>
+            </tr>
+            <tr class="category-row" data-category="Good">
+                <td>701 - 850</td>
+                <td>Good</td>
+            </tr>
+        </tbody>
+    </table>
 
-        <div class="rating-bar">
-            <div class="indicator"></div>
-        </div>
-        <div class="labels">
-            <span>Poor</span>
-            <span>Standard</span>
-            <span>Good</span>
-        </div>
-
-        <!-- Table for Credit Score Ranges -->
-        <table>
-            <thead>
-                <tr>
-                    <th>Credit Score Range</th>
-                    <th>Category</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>350 - 500</td>
-                    <td>Poor</td>
-                </tr>
-                <tr>
-                    <td>501 - 700</td>
-                    <td>Standard</td>
-                </tr>
-                <tr>
-                    <td>701 - 850</td>
-                    <td>Good</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-
+    <!-- Call the JavaScript function after the page loads -->
     <script>
-        // Assume category is provided as a string (e.g., "Poor", "Standard", "Good")
-        const category = document.getElementById("category-value").textContent || "Standard";
-        displayCategory(category);
+        // Pass the score from the server to the JavaScript function
+        const score = parseInt(document.getElementById("score").textContent);
+        displayCategory(score);
     </script>
 </body>
-
 </html>
